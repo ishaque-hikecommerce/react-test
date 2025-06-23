@@ -49,7 +49,10 @@ const Cart = ({
   return (
     <div style={{ padding: 16 }}>
       <h1>Shopping Cart</h1>
-      <p>{text}</p>
+      {
+        (mode == 'browse' || products.length == 0) &&
+        <p>{text}</p>
+      }
 
       {
         products.length === 0 ?
@@ -71,7 +74,7 @@ const Cart = ({
                 }
               </List>
 
-              <Typography variant="subtitle1" sx={{ mt: 2 }}>
+              <Typography fontWeight={'700'} variant="subtitle1" sx={{ mt: 2 }}>
                 Original Total: ₹{originalTotal.toFixed(2)}
               </Typography>
               <Typography variant="h6" color="green">

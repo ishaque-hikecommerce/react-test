@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "./slices/cartSlice";
 import { RootState } from "./store";
 import Cart from "./Cart";
+import { fetchProducts } from "./services/api";
 
 type Product = {
   id: number;
@@ -30,10 +31,17 @@ const ProductList = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   useEffect(() => {
-    axios.get("https://dummyjson.com/products?limit=20&skip=20").then((res) => {
-      setProducts(res.data.products);
-    });
-  }, []);
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
+    try {
+      const { data } = await fetchProducts()
+      setProducts(data?.products || [])
+    } catch (error) {
+      console.error({ error })
+    }
+  }
 
   return (
     <div>
