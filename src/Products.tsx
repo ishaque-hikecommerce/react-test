@@ -42,27 +42,29 @@ const ProductList = () => {
       <Divider sx={{ mb: 2 }} />
       <h1>Products</h1>
       <Grid container spacing={2}>
-        {products.map((product) => (
-          <Grid key={product.id}>
-            <Card>
-              <CardMedia
-                component="img"
-                height="120"
-                image={product.thumbnail}
-                alt={product.title}
-              />
-              <CardContent>
-                <Typography variant="h6">{product.title}</Typography>
-                <Typography variant="body2">₹{product.price}</Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" onClick={() => dispatch(addToCart(product))}>
-                  Add to basket
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
+        {
+          products.map((product) => (
+            <Grid key={product.id} sx={{ minWidth: 200 }}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  height="120"
+                  image={product.thumbnail}
+                  alt={product.title}
+                />
+                <CardContent>
+                  <Typography variant="h6">{product.title}</Typography>
+                  <Typography variant="body2">₹{product.price}</Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" onClick={() => dispatch(addToCart(product))}>
+                    Add to basket
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))
+        }
       </Grid>
     </div>
   );

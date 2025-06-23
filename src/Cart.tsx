@@ -37,11 +37,10 @@ const Cart = ({
   }, 0);
 
   const handleButtonClick = () => {
-    console.log({ mode })
     if (mode === "confirm") {
-      // Dummy order confirmation logic
+      // Confirm order and clear cart
       setOrderConfirmed(true);
-      dispatch(clearCart()); 
+      dispatch(clearCart());
     } else {
       navigate("/checkout");
     }
@@ -52,39 +51,50 @@ const Cart = ({
       <h1>Shopping Cart</h1>
       <p>{text}</p>
 
-      {products.length === 0 ? (
-        <Typography variant="body1">Your basket is empty.</Typography>
-      ) : (
-        <>
-          <List>
-            {products.map((product, index) => (
-              <ListItem key={index}>
-                <ListItemText
-                  primary={product.title}
-                  secondary={`Quantity: ${product.quantity} — ₹${product.price} each — ${product.discountPercentage}% off`}
-                />
-              </ListItem>
-            ))}
-          </List>
+      {
+        products.length === 0 ?
+          (
+            <Typography variant="body1">Your basket is empty.</Typography>
+          ) :
+          (
+            <>
+              <List>
+                {
+                  products.map((product, index) => (
+                    <ListItem key={index}>
+                      <ListItemText
+                        primary={product.title}
+                        secondary={`Quantity: ${product.quantity} — ₹${product.price} each — ${product.discountPercentage}% off`}
+                      />
+                    </ListItem>
+                  ))
+                }
+              </List>
 
-          <Typography variant="subtitle1" sx={{ mt: 2 }}>
-            Original Total: ₹{originalTotal.toFixed(2)}
-          </Typography>
-          <Typography variant="h6" color="green">
-            Discounted Total: ₹{discountedTotal.toFixed(2)}
-          </Typography>
-        </>
-      )}
+              <Typography variant="subtitle1" sx={{ mt: 2 }}>
+                Original Total: ₹{originalTotal.toFixed(2)}
+              </Typography>
+              <Typography variant="h6" color="green">
+                Discounted Total: ₹{discountedTotal.toFixed(2)}
+              </Typography>
+            </>
+          )
+      }
 
-      <Button variant="contained" sx={{ my: 2 }} onClick={handleButtonClick} disabled={products.length === 0}>
-        {mode === "browse" ? "Checkout" : "Confirm Order"}
-      </Button>
+      {
+        products.length > 0 &&
+        <Button variant="contained" sx={{ my: 2 }} onClick={handleButtonClick} disabled={products.length === 0}>
+          {mode === "browse" ? "Checkout" : "Confirm Order"}
+        </Button>
+      }
 
-      {orderConfirmed && (
-        <Alert severity="success" sx={{ mt: 2 }}>
-          ✅ Order confirmed! Thank you for shopping with us.
-        </Alert>
-      )}
+      {
+        orderConfirmed && (
+          <Alert severity="success" sx={{ mt: 2 }}>
+            ✅ Order confirmed! Thank you for shopping with us.
+          </Alert>
+        )
+      }
     </div>
   );
 };
