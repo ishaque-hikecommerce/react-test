@@ -56,7 +56,7 @@ const ProductList = () => {
                 <Typography variant="body2">₹{product.price}</Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">
+                <Button size="small" onClick={() => dispatch(addToCart(product))}>
                   Add to Cart
                 </Button>
               </CardActions>
