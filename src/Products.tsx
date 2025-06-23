@@ -57,7 +57,7 @@ const ProductList = () => {
               </CardContent>
               <CardActions>
                 <Button size="small" onClick={() => dispatch(addToCart(product))}>
-                  Add to Cart
+                  Add to basket
                 </Button>
               </CardActions>
             </Card>
